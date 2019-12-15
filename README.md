@@ -2,7 +2,14 @@
 <i>Let's inject JavaScript into websites to make life better!</i>
 
 <b>What is this project?</b><br>
-Some sites are very UX/UI-wise unfriendly, but we are going to change this by injecting JS into this websites.
+Have you ever been in a wesite and thought to yourself:
+1. This website is so unfriendly.
+2. I wish this website had some new features that could make it better and easier for me.
+
+If you agree, let me tell you a secret: <b>there's a way through!</b>
+
+<b>What?!</b><br>
+Yes! We will be injecting Javascript into these websites that will make them better for us and easier to use<br>
 
 <b>For example:</b><br>
 You are watching a lecture on YouTube and you're really trying to concentrate, but there's a coll video on the left side that seems super funny, so you end up clicking on it and wasting your precious time instead of studying.<br>
