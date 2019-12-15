@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         GDB GUI
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.2
 // @description  Shortcuts for GDB GUI
 // @author       Rony Utesvky (ronyut@gmail.com)
 // @match        http://127.0.0.1:5000/
 // @grant        none
+// @downloadURL  https://cdn.jsdelivr.net/gh/ronyut/monkeyhack/gdbgui/main.js
 // ==/UserScript==
 
 (function() {
