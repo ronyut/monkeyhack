@@ -2,7 +2,7 @@
 // @name        Youtube No Disturb
 // @namespace   http://tampermonkey.net/
 // @description Watch videos in youtube without disturbance
-// @version     1.0.1
+// @version     1.0.2
 // @author      Rony Utesvky (ronyut@gmail.com)
 // @match       https://www.youtube.com/watch*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js?v=1
@@ -55,25 +55,25 @@ function myFunc_youtubeNoDist () {
 
     });
 
-    $(document).on("scroll mouseover", function(e) {
+    $(document).on("scroll mouseover load", function(e) {
         removeBad();
     });
+}
 
-    function removeBad(){
-        // do nothing if dontDisturb mode is off
-        if($.cookie("dontDisturb") == 0){
-            return;
-        }
-
-        let vidChannel = $("#primary .ytd-channel-name a").text();
-        let vids = $("#secondary .ytd-channel-name[title!='"+vidChannel+"']");
-        vids.each(function(i, m){
-            let title = $(m).attr("title");
-            if(typeof title !== typeof undefined && title !== false){
-                $(m).closest("ytd-compact-video-renderer").hide();
-            }
-        });
+function removeBad(){
+    // do nothing if dontDisturb mode is off
+    if($.cookie("dontDisturb") == 0){
+        return;
     }
+
+    let vidChannel = $("#primary .ytd-channel-name a").text();
+    let vids = $("#secondary .ytd-channel-name[title!='"+vidChannel+"']");
+    vids.each(function(i, m){
+        let title = $(m).attr("title");
+        if(typeof title !== typeof undefined && title !== false){
+            $(m).closest("ytd-compact-video-renderer").hide();
+        }
+    });
 }
 
 myFunc_youtubeNoDist();
