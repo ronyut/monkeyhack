@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Shoham: Fast search courses (with Enter and Hash)
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.0.4
 // @description  try to take over the world!
 // @author       Rony Utesvky (ronyut@gmail.com)
+// @match        https://shoham.biu.ac.il/BiuCoursesViewer/
 // @match        https://shoham.biu.ac.il/BiuCoursesViewer/MainPage.aspx
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.4.1.min.js
