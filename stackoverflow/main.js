@@ -2,7 +2,7 @@
 // @name        StackOverFlow best answer
 // @namespace   http://tampermonkey.net/
 // @description Is the chosen answer really good?
-// @version     1.0.1
+// @version     1.0.2
 // @author      Rony Utesvky (ronyut@gmail.com)
 // @match       https://askubuntu.com/questions/*
 // @match       https://stackoverflow.com/questions/*
@@ -17,7 +17,8 @@ function myFunc_stackoverflow() {
     let acceptedNum = $(accepted).parent().find(".js-vote-count").text();
     let answers = $(".js-vote-count");
     answers.each(function(i, ans){
-        if ($(ans).text() > acceptedNum) {
+        // skip question rating
+        if (i != 0 && parseInt($(ans).text()) > acceptedNum) {
             $(accepted).removeClass("fc-green-500");
             $(accepted).css("color", "orange");
             return;
