@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Haaretz ad blocker
 // @namespace    http://tampermonkey.net/
-// @version      1.1.4
+// @version      1.1.5
 // @description  try to take over the world!
 // @author       Rony Utesvky (ronyut@gmail.com)
 // @match        https://www.haaretz.co.il/*
@@ -41,6 +41,9 @@ function removePopAds() {
 
     let ad3 = $("div[data-test='bottomStrip'] span:contains('לרכישה')");
     ad3.closest("div[data-test='bottomStrip']").remove();
+
+    let ad4 = $("div[data-test='topStrip'] a[href*='promotions']");
+    ad4.closest("div[data-test='topStrip']").remove();
 
     let googleAds = $("div[id*='google_ads']");
     googleAds.parent().remove();
