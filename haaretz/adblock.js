@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Haaretz ad blocker
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  try to take over the world!
 // @author       Rony Utesvky (ronyut@gmail.com)
 // @match        https://www.haaretz.co.il/*
@@ -29,6 +29,8 @@
             window.location.href = "http://tikun.li/haaretz/?url=" + window.location.href;
         }
 
+        let googleAds = $("div[id*='google_ads']");
+        googleAds.parent().remove();
 
     });
 
