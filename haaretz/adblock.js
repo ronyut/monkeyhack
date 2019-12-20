@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Haaretz ad blocker
 // @namespace    http://tampermonkey.net/
-// @version      1.1.2
+// @version      1.1.3
 // @description  try to take over the world!
 // @author       Rony Utesvky (ronyut@gmail.com)
 // @match        https://www.haaretz.co.il/*
@@ -13,30 +13,41 @@
 (function() {
     'use strict';
 
-    $(document).ready(function() {
-        setTimeout(function() {
-            let ad = $("div[id^='strip']:contains('מינוי לאתר')");
-            ad.closest("span").parent().remove();
+    removePopAds();
 
-            let ad2 = $("section a span:contains('לרכישה')");
-            ad2.closest("section").parent().parent().remove();
+    setTimeout(function() {
+        removePopAds();
+    }, 4000);
 
-        }, 4000);
+    let adSpotter = $("h1:contains('שמנו לב שחוסם הפרסומות שלך מופעל')");
+    let buy = $("section section p:contains('רכשו עכשיו מינוי לאתר הארץ')");
+    if (buy.length > 0 || adSpotter.length > 0) {
+        window.location.href = "http://tikun.li/haaretz/?url=" + window.location.href;
+    }
 
-        let adSpotter = $("h1:contains('שמנו לב שחוסם הפרסומות שלך מופעל')");
-        let buy = $("section section p:contains('רכשו עכשיו מינוי לאתר הארץ')");
-        if (buy.length > 0 || adSpotter.length > 0) {
-            window.location.href = "http://tikun.li/haaretz/?url=" + window.location.href;
-        }
-
-        let googleAds = $("div[id*='google_ads']");
-        googleAds.parent().remove();
-
-    });
 
     $(document).scroll(function() {
-        let ad = $("div[id^='strip']:contains('מינוי לאתר')");
-        ad.closest("span").parent().remove();
+        removePopAds();
     });
 
 })();
+
+function removePopAds() {
+    let ad = $("div[id^='strip']:contains('מינוי לאתר')");
+    ad.closest("span").parent().remove();
+
+    let ad2 = $("section a span:contains('לרכישה')");
+    ad2.closest("section").parent().parent().remove();
+
+    let ad3 = $("div[data-test='bottomStrip'] span:contains('לרכישה')");
+    ad3.closest("div[data-test='bottomStrip']").remove();
+
+    let googleAds = $("div[id*='google_ads']");
+    googleAds.parent().remove();
+
+    let adClick = $("[href*='adclick']");
+    adClick.parent().remove();
+
+    let adClick2 = $("[href*='doubleclick']");
+    adClick2.parent().remove();
+}
