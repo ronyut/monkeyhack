@@ -2,7 +2,7 @@
 // @name        Morfix Everywhere
 // @namespace   http://tampermonkey.net/
 // @description Left Alt + click on any word anywhere and get a quick translation!
-// @version     1.0.6
+// @version     1.0.7
 // @author      Rony Utesvky (ronyut@gmail.com)
 // @match       *://*/*
 // @exclude     https://www.haaretz.co.il/misc/haaretzsmartphoneapp/*
@@ -60,14 +60,17 @@ function myFunc_morfix () {
 
     $(document).on('keydown', 'body', function(e) {
         if (e.which == 88) { // x
-            openModal(e, "https://www.google.com/search?igu=1&gws_rd=ssl&q=", 0.93);
+            openModal(e, "https://www.google.com/search?igu=1&gws_rd=ssl&q=", 0.93, "#hdtb-msb-vis");
         }
         if (e.which == 90) { // z
             openModal(e, "https://www.morfix.co.il/");
         }
+        if (e.which == 67) { // c
+            openModal(e, "https://www.dictionary.com/browse/", 0.63);
+        }
     });
 
-    function openModal(e, url, width = 0.5){
+    function openModal(e, url, width = 0.5, hash = ""){
     if(altIsPressed){
         altIsPressed = false;
         var range = window.getSelection() || document.getSelection() || document.selection.createRange();
@@ -75,7 +78,7 @@ function myFunc_morfix () {
         if(word != '') {
             e.stopPropagation();
             e.preventDefault();
-            $('#myModal_morfix .modalX-body').html('<iframe width="100%" height="100%" src="' + url + word +'#hdtb-msb-vis"></iframe>');
+            $('#myModal_morfix .modalX-body').html('<iframe width="100%" height="100%" src="' + url + word + hash + '"></iframe>');
             $("#myModal_morfix .modalX-body").css({
                 'height': $(window).height() * 0.7
             });
