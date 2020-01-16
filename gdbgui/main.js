@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GDB GUI
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  Shortcuts for GDB GUI
 // @author       Rony Utesvky (ronyut@gmail.com)
 // @match        http://127.0.0.1:5000/
@@ -17,7 +17,7 @@
     reloadBtn.addClass("reloadBtn");
 
     // create access key for command line
-    $(".gdb_command_input").attr("accesskey", "q");
+    $(".gdb_command_input").attr("accesskey", "a");
 
     $(document).on("keydown", function(e){
         if (e.which == 116) { // f5
