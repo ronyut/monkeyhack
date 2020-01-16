@@ -2,10 +2,9 @@
 // @name        StackOverFlow best answer
 // @namespace   http://tampermonkey.net/
 // @description Is the chosen answer really good?
-// @version     1.0.2
+// @version     1.0.3
 // @author      Rony Utesvky (ronyut@gmail.com)
-// @match       https://askubuntu.com/questions/*
-// @match       https://stackoverflow.com/questions/*
+// @match       *://*/questions/*/*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js?v=1
 // @downloadURL  https://cdn.jsdelivr.net/gh/ronyut/monkeyhack/stackoverflow/main.js
 // ==/UserScript==
