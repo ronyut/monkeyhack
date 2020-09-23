@@ -1,5 +1,5 @@
 # monkeyhack
-<i>Let's inject JavaScript into websites to make life better!</i>
+<i>Let's inject JavaScript into websites to make life easier!</i>
 
 <b>What is this project?</b><br>
 Have you ever been in a wesite and thought to yourself:
