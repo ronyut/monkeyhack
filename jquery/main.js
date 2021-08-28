@@ -8,6 +8,7 @@
 // @require     https://code.jquery.com/jquery-3.6.0.min.js
 // @grant       GM_xmlhttpRequest
 // @connect     ajax.googleapis.com
+// @download    https://raw.githubusercontent.com/ronyut/monkeyhack/master/jquery/main.js
 // ==/UserScript==
 
 
