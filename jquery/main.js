@@ -7,8 +7,8 @@
 // @match       *://*/*
 // @require     https://code.jquery.com/jquery-3.6.0.min.js
 // @grant       GM_xmlhttpRequest
-// @connect     ajax.googleapis.com
-// @downloadURL  https://raw.githubusercontent.com/ronyut/monkeyhack/master/jquery/main.js
+// @connect     code.jquery.com
+// @downloadURL https://raw.githubusercontent.com/ronyut/monkeyhack/master/jquery/main.js
 // ==/UserScript==
 
 
