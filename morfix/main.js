@@ -1,14 +1,13 @@
 // ==UserScript==
 // @name        Morfix Everywhere
-// @namespace   http://tampermonkey.net/
+// @namespace   ronyut
 // @description Left Alt + click on any word anywhere and get a quick translation!
-// @version     1.0.7
+// @version     1.1.1
 // @author      Rony Utesvky (ronyut@gmail.com)
 // @match       *://*/*
-// @exclude     https://www.haaretz.co.il/misc/haaretzsmartphoneapp/*
-// @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js?v=1
-// @require     http://tikun.li/tampermonkey/morfixEverywhere/assets/bootstrap.min.js?v=2
-// @resource    bootstrapCSS http://tikun.li/tampermonkey/morfixEverywhere/assets/bootstrap.min.css?v=00000000000000008
+// @require     https://code.jquery.com/jquery-3.6.0.min.js
+// @require     https://raw.githubusercontent.com/ronyut/monkeyhack/master/morfix/bootstrap/bootstrap.min.js
+// @resource    bootstrapCSS https://raw.githubusercontent.com/ronyut/monkeyhack/master/morfix/bootstrap/bootstrap.min.css
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
 // @grant       GM_getResourceURL
@@ -25,7 +24,7 @@ function cssElement(url) {
   return link;
 }
 
-function myFunc_morfix () {
+(function() {
     'use strict';
 
     var modalXHtml = `
@@ -39,57 +38,77 @@ function myFunc_morfix () {
 </div>
 `;
 
-    //--- Add nodes to page
+    //--- Add modal to page
     $("body").prepend(modalXHtml);
 
-    var ctrlIsPressed = false;
-    var altIsPressed = false;
+    $(document).on('keydown', reportKeyEvent);
 
-    $(document).keydown(function(event){
-        if(event.which=="18")
-            altIsPressed = true;
-    });
+    function reportKeyEvent (e) {
+        //--- Was a Ctrl-Alt-* combo pressed?
 
-    $(document).keyup(function(e){
-        altIsPressed = false;
-    });
+        if (e.altKey && e.key === "x") {
+            e.stopPropagation ();
+            e.preventDefault ();
 
-    $(document).on('contextmenu dblclick', 'body', function(e) {
-        openModal(e, "https://www.morfix.co.il/");
-    });
-
-    $(document).on('keydown', 'body', function(e) {
-        if (e.which == 88) { // x
-            openModal(e, "https://www.google.com/search?igu=1&gws_rd=ssl&q=", 0.93, "#hdtb-msb-vis");
+            let url = "https://www.google.com/search?igu=1&gws_rd=ssl&q=*****#hdtb-msb-vis";
+            let style = "style='height: "+ $(window).height() * 0.7 + "px'";
+            let html = '<iframe width="100%" height="100%" '+ style +' src="' + url +'"></iframe>';
+            openModal(e, html, 0.93);
         }
-        if (e.which == 90) { // z
-            openModal(e, "https://www.morfix.co.il/");
-        }
-        if (e.which == 67) { // c
-            openModal(e, "https://www.dictionary.com/browse/", 0.63);
-        }
-    });
 
-    function openModal(e, url, width = 0.5, hash = ""){
-    if(altIsPressed){
-        altIsPressed = false;
+        else if (e.altKey && e.key === "z") {
+            e.stopPropagation ();
+            e.preventDefault ();
+
+            let url = "https://www.morfix.co.il/*****";
+            let style = "style='height: "+ $(window).height() * 0.7 + "px'";
+            let html = '<iframe width="100%" height="100%" '+ style +' src="' + url +'"></iframe>';
+            openModal(e, html);
+        }
+
+        else if (e.altKey && e.key === "c") {
+            e.stopPropagation ();
+            e.preventDefault ();
+
+            let url = "https://www.dictionary.com/browse/*****";
+            let style = "style='height: "+ $(window).height() * 0.4 + "px'";
+            let html = '<iframe width="100%" height="100%" '+ style +' src="' + url +'"></iframe>';
+
+            url = "https://www.morfix.co.il/*****";
+            html += '<iframe width="100%" height="100%" '+ style +' src="' + url +'"></iframe>';
+
+            url = "https://www.etymonline.com/word/*****";
+            html += '<iframe width="100%" height="100%" '+ style +' src="' + url +'"></iframe>';
+
+            openModal(e, html, 0.63);
+        }
+
+    }
+
+    function openModal(e, html, width = 0.5){
         var range = window.getSelection() || document.getSelection() || document.selection.createRange();
         var word = $.trim(range.toString());
-        if(word != '') {
+        if (word != '') {
             e.stopPropagation();
             e.preventDefault();
-            $('#myModal_morfix .modalX-body').html('<iframe width="100%" height="100%" src="' + url + word + hash + '"></iframe>');
+            html = html.replace(/\*{5}/g, word);
+            $('#myModal_morfix .modalX-body').html(html);
             $("#myModal_morfix .modalX-body").css({
-                'height': $(window).height() * 0.7
+                //'height': $(window).height() * 0.7
             });
             $("#myModal_morfix .modalX-dialog").css({
                 'width': $(window).width() * width
             });
             $('#myModal_morfix').modalX('show');
         }
+        
     }
-}
 
-}
+    // enable scrolling on all pages overflow: hidden;
+    /*$(document).on('mouseover', 'body', function(e) {
+        let bodystyle = $("body").attr("style");
+        let replaced = bodystyle.replace("overflow: hidden;", "");
+        $("body").attr("style", replaced);
+    });*/
 
-myFunc_morfix();
+})();
